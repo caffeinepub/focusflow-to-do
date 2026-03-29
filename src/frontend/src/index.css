@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    /* Neo-noir dark palette (always dark) */
+    --background: 0.118 0.028 258;
+    --foreground: 0.94 0.018 270;
+    --card: 0.14 0.03 258;
+    --card-foreground: 0.94 0.018 270;
+    --popover: 0.16 0.035 258;
+    --popover-foreground: 0.94 0.018 270;
+    --primary: 0.59 0.2 260;
+    --primary-foreground: 0.98 0 0;
+    --secondary: 0.18 0.04 258;
+    --secondary-foreground: 0.94 0.018 270;
+    --muted: 0.18 0.03 258;
+    --muted-foreground: 0.62 0.04 258;
+    --accent: 0.22 0.05 258;
+    --accent-foreground: 0.94 0.018 270;
+    --destructive: 0.58 0.2 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.23 0.048 255;
+    --input: 0.2 0.04 258;
+    --ring: 0.59 0.2 260;
+    /* Electric blue */
+    --blue: 0.59 0.2 260;
+    /* Emerald green */
+    --emerald: 0.72 0.19 152;
+    /* Teal */
+    --teal: 0.67 0.14 182;
+    /* Priority */
+    --priority-high: 0.58 0.2 25;
+    --priority-medium: 0.84 0.16 80;
+    --priority-low: 0.6 0.08 200;
+    /* Chart */
+    --chart-1: 0.59 0.2 260;
+    --chart-2: 0.72 0.19 152;
+    --chart-3: 0.84 0.16 80;
+    --chart-4: 0.58 0.2 25;
+    --chart-5: 0.67 0.14 182;
+    /* Sidebar */
+    --sidebar: 0.14 0.03 258;
+    --sidebar-foreground: 0.94 0.018 270;
+    --sidebar-primary: 0.59 0.2 260;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.22 0.05 258;
+    --sidebar-accent-foreground: 0.94 0.018 270;
+    --sidebar-border: 0.23 0.048 255;
+    --sidebar-ring: 0.59 0.2 260;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    background: oklch(0.118 0.028 258);
+  }
+
+  html {
+    background: oklch(0.09 0.025 260);
+  }
+}
+
+/* Neo-noir background gradient */
+.app-bg {
+  min-height: 100vh;
+  background: radial-gradient(
+      ellipse 80% 60% at 20% 10%,
+      oklch(0.22 0.07 220 / 0.35) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 80% 90%,
+      oklch(0.2 0.06 260 / 0.3) 0%,
+      transparent 55%
+    ),
+    linear-gradient(160deg, oklch(0.11 0.03 260) 0%, oklch(0.09 0.025 258) 100%);
+}
+
+/* Glass card */
+.glass-card {
+  background: oklch(0.14 0.03 258 / 0.92);
+  border: 1px solid oklch(0.23 0.048 255 / 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Progress bar glow */
+.progress-glow {
+  box-shadow: 0 0 12px oklch(0.72 0.19 152 / 0.5), 0 0 4px
+    oklch(0.67 0.14 182 / 0.4);
+}
+
+/* Blue glow on active elements */
+.blue-glow {
+  box-shadow: 0 0 16px oklch(0.59 0.2 260 / 0.35);
+}
+
+/* Task row fade-in */
+@keyframes task-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-fade-in {
+  animation: task-fade-in 0.3s ease-out forwards;
+}
+
+/* Strikethrough animation */
+@keyframes strikethrough {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.task-strike {
+  position: relative;
+  color: oklch(0.5 0.02 258);
+}
+
+.task-strike::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1.5px;
+  background: oklch(0.5 0.02 258);
+  animation: strikethrough 0.35s ease-out forwards;
+}
+
+/* Circular progress ring */
+.timer-ring-track {
+  stroke: oklch(0.22 0.04 258);
+}
+
+.timer-ring-progress {
+  stroke: oklch(0.59 0.2 260);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+  filter: drop-shadow(0 0 6px oklch(0.59 0.2 260 / 0.7));
+}
+
+.timer-ring-progress-break {
+  stroke: oklch(0.72 0.19 152);
+  filter: drop-shadow(0 0 6px oklch(0.72 0.19 152 / 0.7));
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.3 0.05 258);
+  border-radius: 2px;
+}
+
+/* Input focus ring override */
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px oklch(0.59 0.2 260 / 0.4);
+}
